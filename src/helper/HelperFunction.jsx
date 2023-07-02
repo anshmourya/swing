@@ -18,7 +18,9 @@ const onsuccess = async (position, resolve) => {
     const { latitude, longitude } = position.coords;
 
     const res = await axios.get(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&location_type=ROOFTOP&result_type=street_address&key=AIzaSyDtnlW-a6IHfxV8ftc_hLoL7WiHvHbWVAA`
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&location_type=ROOFTOP&result_type=street_address&key=${
+        import.meta.env.VITE_GOOGLE_MAP_KEY
+      }`
     );
 
     const result = res.data.results[0];

@@ -13,7 +13,7 @@ const Nav = () => {
     { title: "User", icon: BsFillPersonFill, link: "/user" },
     { title: "Cart", icon: AiOutlineShoppingCart, link: "/cart" },
   ];
-  const [geoData, setGeoData] = useState(null);
+  const [geoData, setGeoData] = useState({});
   useEffect(() => {
     const fetchLocation = async () => {
       try {
@@ -33,9 +33,8 @@ const Nav = () => {
         <div className="transition-all cursor-pointer logo hover:scale-125">
           LOGO
         </div>
-        {/* {console.log(geoData)} */}
         <span className="text-sm transition-all cursor-pointer hover:text-gray-400">
-          {/* {geoData.formatted_address} */}
+          {geoData.formatted_address}
         </span>
 
         <ul className="flex justify-end flex-1 gap-16">
