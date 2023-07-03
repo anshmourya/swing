@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
 const Navlist = ({ link, title, Icon }) => {
   return (
@@ -11,4 +12,4 @@ const Navlist = ({ link, title, Icon }) => {
   );
 };
 
-export default Navlist;
+export default memo(Navlist);

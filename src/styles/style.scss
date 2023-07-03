@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+nav {
+    box-shadow: 0 15px 40px -20px rgba(40, 44, 63, .15);
+    border: transparent;
+}
+
+.product-card {
+    border-radius: 10px;
+}
+
+.product-card:hover .cart {
+    visibility: visible;
+}
+
+
+.product-card:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+
+.cart {
+    visibility: hidden;
+    cursor: pointer;
+}

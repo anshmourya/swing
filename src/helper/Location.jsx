@@ -24,8 +24,10 @@ const onsuccess = async (position, resolve) => {
     );
 
     const result = res.data.results[0];
+    console.log(result);
     resolve(result);
   } catch (error) {
+    console.log(error);
     throw new Error(error);
   }
 };
