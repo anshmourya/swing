@@ -1,5 +1,5 @@
 import axios from "axios";
-//gettting the addred in form of string. using promise and pass it as a parameter to resolve it. cuz getcurrentPostion return th promises to resolve we have to pass it as paramenter.
+//gettting the address in form of string. using promise and pass it as a parameter to resolve it. cuz getcurrentPostion return th promises to resolve we have to pass it as paramenter.
 export const getLocation = () => {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
@@ -12,7 +12,7 @@ export const getLocation = () => {
     }
   });
 };
-//if get location acces , run this function to get location
+//if we get,location access , run this function to get the location in form of redable address
 const onsuccess = async (position, resolve) => {
   try {
     const { latitude, longitude } = position.coords;
