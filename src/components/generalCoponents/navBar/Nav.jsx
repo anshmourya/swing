@@ -27,9 +27,7 @@ const Nav = () => {
 
     fetchLocation();
   }, []);
-  useEffect(() => {
-    console.log(geoData);
-  }, [geoData]);
+
   return (
     <nav className="p-5 border ">
       <div className="container flex items-center justify-around gap-4 m-auto">
