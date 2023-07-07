@@ -1,52 +1,45 @@
 import { useContext, useEffect, useState } from "react";
-import { handelScroll } from "../../helper/Scroll";
+
 import MainCard from "../../components/generalCoponents/card/MainCard";
 import Nav from "../../components/generalCoponents/navBar/Nav";
 import { AllData } from "../../hooks/Data";
+import FilterModal from "../../components/filter/FilterModal";
+import FilterTab from "../../components/filter/FilterTab";
+import { FilterData } from "../../hooks/Filter";
 
 const Home = () => {
-  const itemsToShowInitially = 12; // number of items to show initially
-  const itemsPerScroll = 6; // number of items to show per scroll
-  const [visibleData, setVisibleData] = useState([]); //store the all visible data
-  const { getData, products } = useContext(AllData);
-  //calling the getData function to get the all product data1 available in the api
+  const { getData, products } = useContext(AllData); //getting the data from AllData context
+  const [visibleData, setVisibleData] = useState(products); // storing the data based on the active filters and mapiing over it to render it
+  const { sortFilter, activeFilter, filterBySort, filterByRate } =
+    useContext(FilterData);
+
+  // running the useEffect to get the data in first render getdata storing the data in PRODUCTS state
   useEffect(() => {
     getData();
   }, []);
 
-  //set the inital value to show in the page , by using itemsToShowInitially
+  //ruunning the useEffect to get the visible data according to the active filters and mapi over it to render the data
   useEffect(() => {
-    if (products) {
-      setVisibleData(products.slice(0, itemsToShowInitially));
+    //setting the newData first performing the the filter function and then sorting. and if there is not active filter it will retutn to the origanal data [      setVisibleData(products);]
+
+    if (sortFilter !== "" || activeFilter.length > 0) {
+      let newData = [...products];
+      newData = filterByRate(newData, activeFilter);
+      newData = filterBySort(newData, sortFilter);
+      setVisibleData([...newData]);
+    } else {
+      setVisibleData(products);
     }
-  }, [products]);
-
-  useEffect(() => {
-    //wraped the handelscroll in in varibale because to remove listener useeffect function itsel without paramenter
-    const handleScroll = () => {
-      handelScroll({
-        visibleData,
-        setVisibleData,
-        data: products,
-        itemsPerScroll,
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll); // invoing the scroll event
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll); // remove listener
-    };
-  }, [visibleData, products, itemsPerScroll]);
-
+  }, [products, activeFilter, sortFilter]);
   return (
     <>
       <Nav />
+      <FilterTab />
+      <FilterModal />
       <div className="container grid grid-cols-1 m-auto place-items-center md:grid-cols-2 lg:grid-cols-3">
         {products &&
           products.length > 0 &&
           visibleData &&
-          // {rendering the data based on the visibleData for infinite scrolling}
           visibleData.map((item) => (
             <MainCard
               key={item.id}
