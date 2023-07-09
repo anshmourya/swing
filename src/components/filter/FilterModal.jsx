@@ -177,10 +177,13 @@ function RadioFilter({ setSortFilter }) {
 //components to render the silder to selcet the products between the [min and max]
 
 function RateSlider({ title, max, mark, filterSetting }) {
+  const [value, setValue] = useState([]);
   return (
     <section>
       <h6 className="text-sm text-gray-500">{title}</h6>
-      <h3 className="font-semibold">3+</h3>
+      <h3 className="font-semibold">
+        {title === "Rating" ? "" : <span>&#8377;</span>} {value[0]} - {value[1]}
+      </h3>
       <Slider
         track="inverted"
         aria-labelledby="track-inverted-range-slider"
@@ -208,6 +211,7 @@ function RateSlider({ title, max, mark, filterSetting }) {
         }}
         //calling filtersetting to change the state of the activefilters
         onChangeCommitted={(e, value) => filterSetting(title, value)}
+        onChange={(e, value) => setValue(value)}
       />
     </section>
   );

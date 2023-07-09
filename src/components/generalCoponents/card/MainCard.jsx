@@ -19,6 +19,7 @@ const MainCard = ({ title, price, rating, time, image }) => {
               alt={title}
               className="w-[254px] h-[160px] object-contain m-auto rounded-md"
               onError={handleImageError} //handel error
+              loading="lazy"
             />
           ) : (
             <Skeleton variant="rectangular" width={254} height={160} />

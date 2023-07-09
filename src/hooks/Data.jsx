@@ -14,8 +14,18 @@ export const AllDataprovider = ({ children }) => {
       console.error(error);
     }
   };
+
+  const getDetails = async (id) => {
+    try {
+      const res = await axios.get(`/product/${id}`);
+      return res.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <AllData.Provider value={{ getData, products }}>
+    <AllData.Provider value={{ getData, products, getDetails }}>
       {children}
     </AllData.Provider>
   );
