@@ -50,7 +50,9 @@ const Home = () => {
               image={item.image}
             />
           ))}
-      </div>
+      </div>  
+
+         
     </>
   );
 };
