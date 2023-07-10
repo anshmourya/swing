@@ -42,7 +42,11 @@ const Detail = () => {
       {detailData.length > 0 && (
         <>
           {/* !-------! */}
-          <Banner title={detailData[0].title} rating={detailData[0].rating} />
+          <Banner
+            title={detailData[0].title}
+            rating={detailData[0].rating}
+            image={detailData[0].image}
+          />
 
           {/* running search query */}
           <DetailTab setSearch={setSearch} search={search} />
@@ -55,6 +59,8 @@ const Detail = () => {
                 title={item.title}
                 image={item.image}
                 price={item.price}
+                id={item.id}
+                wholeData={item}
               />
             ))
           ) : (

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Skeleton } from "@mui/material";
 import Rating from "../buttons/Rating";
+import { Link } from "react-router-dom";
 
-const MainCard = ({ title, price, rating, time, image }) => {
+const MainCard = ({ title, price, rating, time, image, id }) => {
   const [imageError, setImageError] = useState(false);
 
   //handeling error if the url is wrong or url is undefined , the skelton will show.
@@ -37,9 +38,11 @@ const MainCard = ({ title, price, rating, time, image }) => {
               &#8377; {price * 2} FOR TWO
             </span>
           </div>
-          <button className="text-blue-600 font-bold border-t w-[100%] mt-6 p-2 cart transition-all text-sm">
-            QUICK VIEW
-          </button>
+          <Link to={`/detail/${id}`}>
+            <button className="text-blue-600 font-bold border-t w-[100%] mt-6 p-2 cart transition-all text-sm">
+              QUICK VIEW
+            </button>
+          </Link>
         </div>
       </div>
     </>

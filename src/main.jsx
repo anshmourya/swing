@@ -6,13 +6,16 @@ import "./styles/style.css";
 import { BrowserRouter } from "react-router-dom";
 import { AllDataprovider } from "./hooks/Data.jsx";
 import { FilterProvider } from "./hooks/Filter.jsx";
+import { CartDataProvider } from "./hooks/Cart.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       {/* ALLDATA PROVIDER HOOK TO GET THE PRODUICT FROM BACKEND/MIRAJ JS */}
       <AllDataprovider>
         <FilterProvider>
-          <App />
+          <CartDataProvider>
+            <App />
+          </CartDataProvider>
         </FilterProvider>
       </AllDataprovider>
     </BrowserRouter>

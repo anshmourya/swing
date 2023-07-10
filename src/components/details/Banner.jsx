@@ -1,14 +1,14 @@
 import Rating from "../generalCoponents/buttons/Rating";
 
-const Banner = ({ title, rating }) => {
+const Banner = ({ title, rating, image }) => {
   return (
     <>
-      <div className=" content px-2">
+      <div className="px-2 content">
         {/* !----------! */}
 
         <div className="overflow-hidden">
           <img
-            src="https://b.zmtcdn.com/data/pictures/chains/1/19642281/8553e35a6e73d9f06545894eba7b19f0.jpg?fit=around|771.75:416.25&crop=771.75:416.25;*,*"
+            src={image}
             alt=""
             className="w-full h-[25rem] object-cover hover:scale-110  transition-all duration-1000  cursor-pointer"
           />
@@ -16,7 +16,7 @@ const Banner = ({ title, rating }) => {
 
         {/* !----------! */}
 
-        <div className="flex justify-between cursor-pointer mt-9 items-center">
+        <div className="flex items-center justify-between cursor-pointer mt-9">
           <h1 className="text-lg font-semibold leading-3 lg:text-2xl">
             {title}
           </h1>
@@ -31,8 +31,8 @@ const Banner = ({ title, rating }) => {
           <h6 className="text-lg font-light">
             North Indian, Chinese, Mughlai, Sichuan
           </h6>
-          <h5 className="text-gray-500 my-2">Goregaon East, Mumbai</h5>
-          <h5 className="text-sm my-2 text-gray-500">
+          <h5 className="my-2 text-gray-500">Goregaon East, Mumbai</h5>
+          <h5 className="my-2 text-sm text-gray-500">
             <span className="text-orange-400"> Open Now</span> 12midnight –
             1:30am, 9am – 12midnight (Today)
           </h5>
