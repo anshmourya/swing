@@ -48,11 +48,10 @@ const Home = () => {
               rating={item.rating}
               price={item.price}
               image={item.image}
+              id={item.id}
             />
           ))}
-      </div>  
-
-         
+      </div>
     </>
   );
 };

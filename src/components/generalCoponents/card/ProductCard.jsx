@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Skeleton } from "@mui/material";
+import Cart from "../buttons/Cart";
 
-const ProductCard = ({ title, price, image }) => {
+const ProductCard = ({ title, price, image, wholeData }) => {
   const [imageError, setImageError] = useState(false);
 
   //handeling error if the url is wrong or url is undefined , the skelton will show.
@@ -34,12 +35,17 @@ const ProductCard = ({ title, price, image }) => {
 
         {/* !-------------! */}
         <div className="max-sm:flex-1 ">
-          <h1 className="text-xl font-semibold  cursor-pointer max-sm:text-lg">
+          <h1 className="text-xl font-semibold cursor-pointer max-sm:text-lg">
             {title}
           </h1>
-          <h6 className="font-light leading-8">
-            ₹{price} <button className="float-right mr-7">add</button>
-          </h6>
+          {/* !-------------! */}
+          <div className="flex items-center justify-between">
+            <h6 className="font-light leading-8">₹{price}</h6>
+            {/* cart button(component) with all the functionalty in it */}
+            <Cart data={wholeData} />
+          </div>
+
+          {/* !-------------! */}
           <h6 className="leading-5 lg:w-[80%] max-sm:text-xs">
             Richly flavored aromatic rice layered with marinated chicken pieces
             in a delicate blend of whole spices.
