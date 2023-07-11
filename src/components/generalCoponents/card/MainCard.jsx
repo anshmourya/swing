@@ -34,9 +34,7 @@ const MainCard = ({ title, price, rating, time, image, id }) => {
             {/* //fixing the numbe to the only one Number */}
             <Rating rating={rating.toFixed(1)} />
             <span className="text-xs font-normal">{time} MINS</span>{" "}
-            <span className="text-xs font-normal">
-              &#8377; {price * 2} FOR TWO
-            </span>
+            <span className="text-xs font-normal">&#8377; {price} FOR ONE</span>
           </div>
           <Link to={`/detail/${id}`}>
             <button className="text-blue-600 font-bold border-t w-[100%] mt-6 p-2 cart transition-all text-sm">
