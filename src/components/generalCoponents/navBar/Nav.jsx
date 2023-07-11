@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getLocation } from "../../../helper/Location";
 import Navlist from "./Navlist";
 import { CiSearch } from "react-icons/ci";
 import { MdOutlineLocalOffer } from "react-icons/md";
 import { BsFillPersonFill } from "react-icons/bs";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { BsBox2 } from "react-icons/bs";
 const Nav = () => {
   //navdata to render navlist dynamically`
   const navData = [
     { title: "search", icon: CiSearch, link: "/store" },
     { title: "Offer", icon: MdOutlineLocalOffer, link: "/offer" },
     { title: "User", icon: BsFillPersonFill, link: "/user" },
-    { title: "Cart", icon: AiOutlineShoppingCart, link: "/cart" },
+    // { title: "Cart", icon: AiOutlineShoppingCart, link: "/cart" },
   ];
   const [geoData, setGeoData] = useState({});
   useEffect(() => {
@@ -51,6 +52,13 @@ const Nav = () => {
               link={item.link}
             />
           ))}
+          <Link to={"/cart"}>
+            <li className="relative flex items-center justify-around gap-2 text-lg font-semibold transition-all cursor-pointer hover:text-orange-400">
+              <BsBox2 className="text-xl fill-green-500 stroke-slate-950" />
+              Cart
+              <span className="absolute top-[8px] left-[6px] text-xs ">6</span>
+            </li>
+          </Link>
         </ul>
       </div>
     </nav>

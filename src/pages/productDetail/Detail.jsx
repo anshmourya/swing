@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import Banner from "../../components/details/Banner";
 import ProductCard from "../../components/generalCoponents/card/ProductCard";
 import DetailTab from "../../components/details/DetailTab";
+import Nav from "../../components/generalCoponents/navBar/Nav";
+import AllCartItemTotal from "../../components/cart/AllCartItemTotal";
 
 const Detail = () => {
   const { id } = useParams(); //getting the id from url
@@ -66,6 +68,7 @@ const Detail = () => {
           ) : (
             <NoItem />
           )}
+          <AllCartItemTotal />
         </>
       )}
     </>
