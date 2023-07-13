@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import { CartData } from "../../hooks/Cart";
 
 const AllCartItemTotal = () => {
-  const { cartItems } = useContext(CartData); //getting the cart data from the cart context
-  const [cartItemsData, setCartItemsData] = useState(); //using to store the totalPirce and totalItem data
+  const { cartItems, cartItemsData, setCartItemsData } = useContext(CartData); //getting the cart data from the cart context
 
   //function to get the totalPrice and totalItem
   const getCartData = () => {
@@ -20,7 +19,8 @@ const AllCartItemTotal = () => {
   };
 
   useEffect(() => {
-    getCartData();``
+    getCartData();
+    ``;
   }, [cartItems]);
   return (
     <>

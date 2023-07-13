@@ -182,7 +182,8 @@ function RateSlider({ title, max, mark, filterSetting }) {
     <section>
       <h6 className="text-sm text-gray-500">{title}</h6>
       <h3 className="font-semibold">
-        {title === "Rating" ? "" : <span>&#8377;</span>} {value[0]} - {value[1]}
+        {title === "Rating" ? "" : <span>&#8377;</span>} {value[0] || 0} -{" "}
+        {value[1] || max}
       </h3>
       <Slider
         track="inverted"

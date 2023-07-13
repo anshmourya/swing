@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getLocation } from "../../../helper/Location";
 import Navlist from "./Navlist";
@@ -6,7 +6,9 @@ import { CiSearch } from "react-icons/ci";
 import { MdOutlineLocalOffer } from "react-icons/md";
 import { BsFillPersonFill } from "react-icons/bs";
 import { BsBox2 } from "react-icons/bs";
+import { CartData } from "../../../hooks/Cart";
 const Nav = () => {
+  const { cartItemsData } = useContext(CartData);
   //navdata to render navlist dynamically`
   const navData = [
     { title: "search", icon: CiSearch, link: "/store" },
@@ -54,9 +56,15 @@ const Nav = () => {
           ))}
           <Link to={"/cart"}>
             <li className="relative flex items-center justify-around gap-2 text-lg font-semibold transition-all cursor-pointer hover:text-orange-400">
-              <BsBox2 className="text-xl fill-green-500 stroke-slate-950" />
+              <BsBox2
+                className={`text-xl ${cartItemsData ? "fill-green-500" : ""}`}
+              />
               Cart
-              <span className="absolute top-[8px] left-[6px] text-xs ">6</span>
+              {cartItemsData && (
+                <span className="absolute top-[8px] left-[6px] text-xs font-bold ">
+                  {cartItemsData.items}
+                </span>
+              )}
             </li>
           </Link>
         </ul>

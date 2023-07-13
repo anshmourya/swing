@@ -3,6 +3,9 @@ import { createContext, useState, useEffect } from "react";
 export const CartData = createContext();
 
 export const CartDataProvider = ({ children }) => {
+  //using to store the totalPirce and totalItem data
+  const [cartItemsData, setCartItemsData] = useState();
+
   //getting cart data form localstorage or setting it to []
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
@@ -40,13 +43,28 @@ export const CartDataProvider = ({ children }) => {
     }
   };
 
+  //function to get the totalPrice and totalItem
+  const getCartData = () => {
+    let price = 0,
+      items = 0;
+    cartItems.forEach((item) => {
+      price = item.total + price;
+      items = items + item.cartItems;
+    });
+    //after setting the totalPrice and totalItem reset the price and items to zero
+    setCartItemsData({ price: price, items: items });
+  };
+
   //sending the cartitems to the localstorage every time cartitems changes.
   useEffect(() => {
+    getCartData();
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
   return (
-    <CartData.Provider value={{ handelCart, cartItems }}>
+    <CartData.Provider
+      value={{ handelCart, cartItems, cartItemsData, setCartItemsData }}
+    >
       {children}
     </CartData.Provider>
   );
