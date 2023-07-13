@@ -2,8 +2,22 @@ import { useContext } from "react";
 import { CartData } from "../../hooks/Cart";
 import ProductCard from "../../components/generalCoponents/card/ProductCard";
 import Nav from "../../components/generalCoponents/navBar/Nav";
+import axios from "axios";
+
 const Cart = () => {
   const { cartItems, cartItemsData } = useContext(CartData);
+
+  //sending the post request for the payment available in the card.
+  const Payment = async () => {
+    try {
+      const res = await axios.post("http://localhost:3000/payment", {
+        item: cartItems.filter((item) => item.cartItems > 0),
+      });
+      window.location.href = res.data.url;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -30,7 +44,7 @@ const Cart = () => {
         </div>
         {/* {!---------!} */}
 
-        <SubTotal SubTotalData={cartItemsData} />
+        <SubTotal SubTotalData={cartItemsData} onPayment={Payment} />
       </div>
     </>
   );
@@ -38,7 +52,7 @@ const Cart = () => {
 
 export default Cart;
 
-function SubTotal({ SubTotalData }) {
+function SubTotal({ SubTotalData, onPayment }) {
   const { items, price } = SubTotalData || 0;
   return (
     <div className="flex-1 w-full p-6 mt-6 bg-white border rounded-lg shadow-md">
@@ -59,7 +73,10 @@ function SubTotal({ SubTotalData }) {
         </div>
       </div>
 
-      <button className="mt-6 w-full rounded-md bg-orange-400 py-1.5 font-medium text-white hover:shadow-md">
+      <button
+        className="mt-6 w-full rounded-md bg-orange-400 py-1.5 font-medium text-white hover:shadow-md"
+        onClick={onPayment}
+      >
         Check out
       </button>
     </div>
