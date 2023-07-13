@@ -14,7 +14,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.13.6",
     "autoprefixer": "^10.4.14",
-    "axios": "^1.4.0",
+    "axios": "^0.21.0",
     "dotenv": "^16.3.1",
     "miragejs": "^0.1.47",
     "postcss": "^8.4.24",

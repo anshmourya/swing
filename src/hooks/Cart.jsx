@@ -63,7 +63,12 @@ export const CartDataProvider = ({ children }) => {
 
   return (
     <CartData.Provider
-      value={{ handelCart, cartItems, cartItemsData, setCartItemsData }}
+      value={{
+        handelCart,
+        cartItems,
+        cartItemsData,
+        setCartItemsData,
+      }}
     >
       {children}
     </CartData.Provider>
