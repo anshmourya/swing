@@ -10,9 +10,12 @@ const Cart = () => {
   //sending the post request for the payment available in the card.
   const Payment = async () => {
     try {
-      const res = await axios.post("http://localhost:3000/payment", {
-        item: cartItems.filter((item) => item.cartItems > 0),
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/payment`,
+        {
+          item: cartItems.filter((item) => item.cartItems > 0),
+        }
+      );
       window.location.href = res.data.url;
     } catch (error) {
       console.error(error);
