@@ -5,8 +5,9 @@ createServer({
     routes() {
         this.passthrough("https://maps.googleapis.com/**"); //passingthrough route
         this.passthrough("http://localhost:3000/**"); //passingthrough route
-        this.passthrough("https://swing.onrender.com/**"); //passingthrough route
         this.passthrough("https://swing-bkty.vercel.app/**"); //passingthrough route
+        this.passthrough("https://accounts.google.com/**"); //passingthrough route
+        this.passthrough("https://oauth2.googleapis.com/**"); //passingthrough route
 
         //route to get alll the data available in the Main.json file
         this.get("/product", () => Data);
