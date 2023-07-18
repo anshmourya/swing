@@ -6,8 +6,11 @@ import { AllData } from "../../hooks/Data";
 import FilterModal from "../../components/filter/FilterModal";
 import FilterTab from "../../components/filter/FilterTab";
 import { FilterData } from "../../hooks/Filter";
+import { useGoogleOneTapLogin } from "react-google-one-tap-login";
+import { Auth } from "../../hooks/Auth";
 
 const Home = () => {
+  const { isauthenticated } = useContext(Auth);
   const { getData, products } = useContext(AllData); //getting the data from AllData context
   const [visibleData, setVisibleData] = useState(products); // storing the data based on the active filters and mapiing over it to render it
   const { sortFilter, activeFilter, filterBySort, filterByRate } =
@@ -30,7 +33,20 @@ const Home = () => {
     } else {
       setVisibleData(products);
     }
-  }, [products, activeFilter, sortFilter]);
+  }, [products, activeFilter, sortFilter, filterByRate, filterBySort]);
+
+  //one tab google login.
+
+  // if (!isauthenticated) {
+  //   useGoogleOneTapLogin({
+  //     onSuccess: (res) => console.log(res),
+  //     onError: (err) => console.log(err),
+  //     googleAccountConfigs: {
+  //       client_id: import.meta.env.VITE_GOOGLE_AUTH_KEY,
+  //     },
+  //   });
+  // }
+
   return (
     <>
       <Nav />
