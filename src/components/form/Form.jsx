@@ -1,19 +1,16 @@
-import { ToastContainer } from "react-toastify";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { useContext } from "react";
-import { Auth } from "../../hooks/Auth";
+import { Link } from "react-router-dom";
+import { BsGoogle } from "react-icons/bs";
 
-const Form = ({ title }) => {
-  const { setCookie } = useContext(Auth);
+const Form = ({ title, onClickFunction }) => {
   return (
     <>
-      <div className="flex items-center justify-center h-screen bg-black">
-        <div className="flex flex-col items-center justify-center ">
+      <div className="bg-black">
+        <div className="flex flex-col items-center justify-center h-screen ">
           <div
             className="w-[430px]  p-12 rounded-lg"
             style={{ background: "rgba(0,0,0,.75)" }}
           >
-            <h1 className="text-3xl text-white ">Sign In</h1>
+            <h1 className="text-3xl text-white ">{title || "Sign Up"}</h1>
             <input
               type="email"
               placeholder="Email"
@@ -29,7 +26,23 @@ const Form = ({ title }) => {
               {title === "Sign In" ? "Sign In" : "Sign Up"}
             </button>
 
-            <p className="my-3 text-sm text-gray-400">
+            <p className="my-4 text-gray-400">
+              {title === "Sign In" ? "New To Swing?" : "Already Have Account?"}{" "}
+              <span className="text-white cursor-pointer hover:border-b">
+                <Link to={title === "Sign In" ? "/signup" : "/signin"}>
+                  {title === "Sign In" ? "Sign Up Now" : "Sign In Now"}
+                </Link>
+              </span>
+            </p>
+
+            <button
+              className="flex items-center justify-center w-full gap-2 p-2 my-4 text-gray-400 border rounded-md"
+              onClick={onClickFunction}
+            >
+              <BsGoogle /> {title} with google
+            </button>
+
+            <p className="text-sm text-gray-400">
               This page is protected by Google reCAPTCHA to ensure you&apos;re
               not a bot.{" "}
               <span className="font-semibold text-blue-700 cursor-pointer">
@@ -37,21 +50,7 @@ const Form = ({ title }) => {
               </span>
             </p>
           </div>
-          {/* <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_AUTH_KEY}>
-            <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                console.log(credentialResponse);
-                setCookie("token", credentialResponse.credential, 1);
-              }}
-              onError={() => {
-                console.log("Login Failed");
-              }}
-            />
-            ;
-          </GoogleOAuthProvider> */}
         </div>
-
-        <ToastContainer />
       </div>
     </>
   );

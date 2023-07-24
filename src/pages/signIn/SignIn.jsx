@@ -1,12 +1,12 @@
-import { useContext } from "react";
 import Form from "../../components/form/Form";
-import { Auth } from "../../hooks/Auth";
-import { useNavigate } from "react-router-dom";
+
 const SignIn = () => {
-  const navigate = useNavigate();
-  const { isAuthenticated } = useContext(Auth);
-  console.log(isAuthenticated);
-  return !isAuthenticated ? <Form /> : navigate("/");
+  const googleLogin = () => {
+    console.log("performing google login");
+    window.open(`${import.meta.env.VITE_SERVER_URL}/auth/google`, "_self");
+  };
+
+  return <Form title={"Sign In"} onClickFunction={googleLogin} />;
 };
 
 export default SignIn;

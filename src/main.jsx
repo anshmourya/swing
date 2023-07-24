@@ -11,7 +11,7 @@ import { AuthProvider } from "./hooks/Auth.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      {/* ALLDATA PROVIDER HOOK TO GET THE PRODUICT FROM BACKEND/MIRAJ JS */}
+      {/**    !ALLDATA PROVIDER HOOK TO GET THE PRODUICT FROM BACKEND/MIRAJ JS */}
       <AuthProvider>
         <AllDataprovider>
           <FilterProvider>

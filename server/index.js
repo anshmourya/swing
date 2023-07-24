@@ -1,62 +1,40 @@
-require("dotenv").config()
+require("dotenv").config();
 const express = require('express');
 const app = express();
-
 const cors = require('cors');
+const session = require('express-session');
+const passport = require("./auth/passport");
+const routes = require('./routes');
+
 app.use(cors({
-    origin: process.env.CLIENT_URl
-}))
-app.use(express.json())
+    origin: process.env.CLIENT_URl,
+}));
+// Set up CORS middleware
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', process.env.CLIENT_URl);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true'); // Set the header to 'true'
+    next();
+});
 
-const stripe = require("stripe")(process.env.STRIPE_KEY)
 
+app.use(express.json());
 
-//route to accept the request for payment from the front end
-app.post('/payment', async (req, res) => {
-    console.log(req.body);
-    // creating the session for stripe
-    try {
-        const session = await stripe.checkout.sessions.create({
+app.use(session({
+    secret: process.env.SESSION_SECRET_KEY,
+    resave: false,
+    saveUninitialized: false,
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+}));
 
-            payment_method_types: ["card"], //payment method types
-            mode: "payment", //one time payment
+app.use(passport.initialize());
+app.use(passport.session());
 
-            //mapping to the cart data recieved from the front end
-            line_items: req.body.item.map((item) => {
-                const { price, cartItems: quantity, title, image } = item
+app.use('/', routes);
 
-                return {
-                    price_data: {
-                        currency: "inr", //accepting currency [RUPEE]
-
-                        product_data: {
-                            name: title,
-                            images: [image]
-                        },
-
-                        unit_amount: price * 100
-
-                    },
-                    quantity: quantity,
-
-                }
-            }),
-
-            success_url: "http://localhost:5173/",
-            cancel_url: "http://localhost:5173/"
-
-        })
-        console.log(session.url);
-        res.json({ url: session.url })
-    } catch (error) {
-        console.error(error)
-    }
-
-})
 app.get("/", (req, res) => {
-    res.send("ok")
-})
+    res.send("ok");
+});
 
-
-
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 3000);
