@@ -17,22 +17,13 @@ function App() {
         <Route path="/detail/:id" element={<Detail />} />
 
         {/* Protected Route - Cart */}
-        <Route
-          path="/cart"
-          element={user ? <Cart /> : <Navigate to="/signIn" />}
-        />
+        <Route path="/cart" element={<Cart />} />
 
         {/* Public Route - SignIn */}
-        <Route
-          path="/signIn"
-          element={user ? <Navigate to="/" /> : <SignIn />}
-        />
+        <Route path="/signIn" element={<SignIn />} />
 
         {/* Public Route - SignUp */}
-        <Route
-          path="/signUp"
-          element={user ? <Navigate to="/" /> : <SignUp />}
-        />
+        <Route path="/signUp" element={<SignUp />} />
 
         {/* Add more routes as needed */}
       </Routes>
