@@ -49,6 +49,12 @@ nav {
     transform: translate(-50%, -50%);
 }
 
+@media (width < 600px) {
+    .modal-size {
+        min-width: 363px;
+    }
+}
+
 .filter-btn {
     display: flex;
     align-items: center;
