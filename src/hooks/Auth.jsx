@@ -10,10 +10,11 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await Axios.get(
         `${import.meta.env.VITE_SERVER_URL}/success`,
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        }
       );
-      setuser(res);
-      if (res) setuser(res.data.user);
+      if (res.data) setuser(res.data.user);
     } catch (error) {
       console.error("Couldn't get user");
     }
